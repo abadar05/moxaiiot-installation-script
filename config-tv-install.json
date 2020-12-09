@@ -1,0 +1,36 @@
+{
+    "general":{
+        "ip_address": "192.168.4.127",
+        "username": "moxa",
+        "password": "moxa",
+		"ssh_port": 22
+	},
+		
+    "directory": {	
+		"remote_dir": "/home/moxa/",
+		"local_dir": "C:/Python3/Starter_kit/Installation-script-v1.0.0/copyToAndFromUC/",
+		"download_files": [],
+		"download_all": false,
+		"upload_files": ["teamviewer-iot-agent-armv7_2.12.15_armhf.deb"],
+		"upload_all": false
+	},
+		
+	"linux":{
+	    "command": ["sudo dpkg -i teamviewer-iot-agent-armv7_2.12.15_armhf.deb"], 			
+	    "commandPost": ["rm *.deb"], 
+		"commandPost1": [] 
+    },
+
+	"options":{
+	    "install_time": 3,
+		"retry_count": 5,
+		"enable_installation": true,
+		"enable_post_installation":true,
+		"enable_checker": false,
+		"tv_remote_assignment": ["sudo teamviewer-iot-agent assign -t <token> --accept-license"],
+		"tv_set_properties":["sudo teamviewer-iot-agent configure set FileTransferAccessControl 1",
+							"sudo teamviewer-iot-agent stop", "sudo teamviewer-iot-agent start"
+							]
+								 
+	}		  
+}

@@ -1,0 +1,33 @@
+{
+    "general":{
+        "ip_address": "192.168.4.127",
+        "username": "moxa",
+        "password": "moxa",
+		"ssh_port": 22
+	},
+		
+    "directory": {	
+		"remote_dir": "/home/moxa/",
+		"local_dir": "C:/Python3/Starter_kit/Installation-script-v1.0.0/copyToAndFromUC/",
+		"download_files": [],
+		"download_all": false,
+		"upload_files": ["collect_tv_info.sh"],
+		"upload_all": false
+	},
+		
+	"linux":{
+	    "command": [], 			
+	    "commandPost": [], 
+		"commandPost1": [] 
+    },
+
+	"options":{
+	    "install_time": 1,
+		"retry_count": 5,
+		"enable_installation": false,
+		"enable_post_installation":false,
+		"enable_checker": true,
+		"tv_remote_assignment": [],
+		"tv_set_properties": []
+	}
+}
