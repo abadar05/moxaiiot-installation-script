@@ -3,7 +3,7 @@
         "ip_address": "192.168.4.127",
         "username": "moxa",
         "password": "moxa",
-		"ssh_port": 22
+	"ssh_port": 22
 	},
 		
     "directory": {	
@@ -18,11 +18,11 @@
 	"linux":{
 	    "command": [], 			
 	    "commandPost": [], 
-		"commandPost1": [] 
+	    "commandPost1": [] 
     },
 
 	"options":{
-	    "install_time": 1,
+	    	"install_time": 1,
 		"retry_count": 5,
 		"enable_installation": false,
 		"enable_post_installation":false,
