@@ -6,9 +6,6 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
-
-
-
 sn=$(fw_printenv |grep serialnu |cut -c14-)
 infoFile=${sn}_TvInfo.log
 
