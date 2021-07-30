@@ -45,7 +45,7 @@ def test_post_installation(file, bc_obj):
         if TvInfoDict is not None:
             for key, value in TvInfoDict.items():
                 if  TvInfoDict["SN"]:
-                    sn = value
+                    sn = TvInfoDict["SN"]
     
             status, KEY, VALUE = q_check.test_tv_log(bc_obj._local_dir + file)
             if status == True:
