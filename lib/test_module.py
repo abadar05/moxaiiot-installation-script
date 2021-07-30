@@ -38,6 +38,7 @@ class Quality_Check(SSH_Client):
             
         self._TeamViewerInfoDict = {}   
            
+    # return Dict of key value pairs        
     def _read_all_lines(self, readlines):
         """
         This function reads line by line from readlines object in for loop, 
@@ -111,7 +112,7 @@ class Quality_Check(SSH_Client):
         else:    
             return None
     
-    
+    # return readlines into an array
     def read_log_file(self, file):
         """
         This function read log file and return into an array
@@ -126,7 +127,7 @@ class Quality_Check(SSH_Client):
             logger.error(e)
             return None
     
-    
+    # return True if file is present in the remote dir of the gateway 
     def is_file(self, filename, directory):
         """
         This fucntion checks if file is present in the remote server at the given location. 
@@ -165,7 +166,7 @@ class Quality_Check(SSH_Client):
                     self.disconnect_sshserver()
                     return True
         
-      
+    # return Ture when all test conditions are verified   
     def test_tv_log(self, file):
         """
         This function compares the actual key values with expected value 
@@ -211,4 +212,3 @@ class Quality_Check(SSH_Client):
         if Deamon and Status and CloudConnectivity and FileTransfer == True:
            return True, None, None
         
-                                 
