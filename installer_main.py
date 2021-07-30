@@ -30,23 +30,24 @@ __status__ = "beta"
 
 logger = logging.getLogger(__name__)
 
-def test_post_installation(bc_obj):
+def test_post_installation(file, bc_obj):
     # Post Installation test using only Quality_Check Class
         
     q_check = Quality_Check(bc_obj) 
     logger.info('Register test functions')
     
-    result = q_check.is_file("TAIHB1166038_TvInfo.log", bc_obj._remote_dir)
+    # This checks if log file created successfully on Moxa gateway
+    result = q_check.is_file(file, bc_obj._remote_dir)
     if result:
         # get serial number
-        output = q_check.read_log_file(bc_obj._local_dir + "TAIHB1166038_TvInfo.log")
+        output = q_check.read_log_file(bc_obj._local_dir + file)
         TvInfoDict = q_check._read_all_lines(output)
         if TvInfoDict is not None:
             for key, value in TvInfoDict.items():
                 if  TvInfoDict["SN"]:
                     sn = value
     
-            status, KEY, VALUE = q_check.test_tv_log(bc_obj._local_dir + "TAIHB1166038_TvInfo.log")
+            status, KEY, VALUE = q_check.test_tv_log(bc_obj._local_dir + file)
             if status == True:
                 logger.info("*********************************************************************")
                 logger.info("TeamViewer IoT Agent Installed Successfully!")
@@ -57,7 +58,7 @@ def test_post_installation(bc_obj):
                 logger.error("Result: FAILED! DeviceIP: {} and SN: {} => TeamViewer IoT Agent {}: {}"
                             .format(bc_obj._ip_address, sn, KEY, VALUE))
                 logger.error("*********************************************************************")
-           
+         
    
 def close_terminal(): 
    input('\n Press Enter to close the terminal window:\n\n')
@@ -151,7 +152,7 @@ def main(assigned_args = None):
             else:        
                 client.upload_to_server()
                 client.execute_cmd(client._command)
-                print("Waiting for teamviewer-iot-agent to come online ...")
+                #print("Waiting for teamviewer-iot-agent to come online ...")
                 
                 for i in range(bc_obj._install_time, 0, -1): 
                     print("Waiting "+str(i)+" minutes. Please wait.")
@@ -164,7 +165,7 @@ def main(assigned_args = None):
         else:   
             client.upload_to_server()
             client.execute_cmd(client._command)
-            print("Waiting for teamviewer-iot-agent to come online ...")
+            #print("Waiting for teamviewer-iot-agent to come online ...")
               
             for i in range(bc_obj._install_time, 0, -1): 
                 print("Waiting "+str(i)+" minutes. Please wait.")
@@ -215,14 +216,15 @@ def main(assigned_args = None):
             logger.debug("Check Return Status of Retry_SSH Funtion: {}".format(output_retry_ssh))   
              
             if output_retry_ssh == True:
-                client.execute_cmd(["sudo sh collect_tv_info.sh"])
+                client.execute_cmd(client._command)
                 print("")
         else:
-            client.execute_cmd(["sudo sh collect_tv_info.sh"]) 
+            client.execute_cmd(client._command) 
             print("")
         
-        #Perform quality checks to verify if teamviewer app is installed properly
-        result_post_install = test_post_installation(bc_obj)
+        #Perform quality checks to verify if teamviewer app is installed properly on Moxa gateway
+        for log_file in bc_obj._download_files:
+            result_post_install = test_post_installation(log_file, bc_obj)
 
         if result_post_install != False:
 
@@ -244,5 +246,3 @@ def main(assigned_args = None):
     
 if __name__ == '__main__':
     main()
-
-
