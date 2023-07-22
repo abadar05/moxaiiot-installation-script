@@ -2,6 +2,8 @@
 
 Automatically deploy IIoT applications on eligible Moxa IIoT gateways.  
 
+Language Python==3.7
+
 Getting started:
 
 1. Download and Install Latest Release of ThingsPro Gateway Software
